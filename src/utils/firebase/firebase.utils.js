@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { set } from 'firebase/database';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -25,12 +25,14 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGoolePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 
 // creating firestore database connection
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
+  if (!userAuth) return; 
   // userAuth 
   const userDocRef = doc(db, 'users', userAuth.uid)
 
@@ -46,7 +48,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName,
         email,
-        createdAt
+        createdAt,
+        ...additionalInfo
       })
     }
     catch (error) {
@@ -55,5 +58,11 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
   // if user data does not exist
   return userDocRef;
+}
 
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password ) return
+
+  const newUser = await createUserWithEmailAndPassword(auth, email, password)
+  return newUser
 }
