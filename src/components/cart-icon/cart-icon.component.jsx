@@ -8,16 +8,18 @@ import { set } from 'firebase/database'
 
 const CartIcon = () => {
 
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
   const toggleCartOpen = () => {
     setIsCartOpen(!isCartOpen);
   }
 
+  // sum quantity of all carItems 
+
   return (
     <div className='cart-icon-container' onClick={toggleCartOpen}>
       <ShoppingIcon className='shopping-icon'/>
-      <span className='item-count'>0</span>
+      <span className='item-count'>{cartCount}</span>
     </div>
   )
 }
