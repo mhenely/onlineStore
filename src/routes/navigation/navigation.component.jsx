@@ -9,10 +9,12 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart-context";
 
 const Navigation = () => {
 
   const {currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   // tracking authentication state of the user and resetting context back to the state of no user logged in
   const signOutHandler = async() => {
@@ -40,7 +42,8 @@ const Navigation = () => {
           }
           <CartIcon />
         </div>
-        <CartDropdown />
+        {/* douple ampersand returns last truthy value (so returns the component if both are truthy) */}
+        { isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </>
