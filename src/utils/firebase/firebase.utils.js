@@ -1,12 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, 
-  signInWithRedirect, 
+        signInWithRedirect, 
         signInWithPopup, GoogleAuthProvider,
         createUserWithEmailAndPassword, 
         signInWithEmailAndPassword, 
-        signOut, onAuthStateChanged } from 'firebase/auth';
+        signOut, onAuthStateChanged, 
+        } from 'firebase/auth';
 import { set } from 'firebase/database';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore';
 
 
 // Your web app's Firebase configuration
@@ -35,6 +36,33 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider)
 
 // creating firestore database connection
 export const db = getFirestore();
+
+// populating firebase database with items for sale
+export const addCollectionAndDocuments = async(collectionKey, itemsToAdd) => {
+  const collectionRef = collection(db,collectionKey);
+  const batch = writeBatch(db);
+
+  itemsToAdd.forEach((item) => {
+    const docRef = doc(collectionRef, item.title.toLowerCase());
+    batch.set(docRef, item);
+  })
+
+  await batch.commit();
+} 
+
+export const getCategoriesAndDocuments = async() => {
+  const collectionRef = collection(db, 'categories');
+  // gives snapshot of object
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {})
+  return categoryMap;
+}
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
   if (!userAuth) return; 
