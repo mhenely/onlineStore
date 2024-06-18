@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { CategoriesContext } from '../../contexts/categories.context';
 import ProductCard from '../../components/product-card/product-card.component';
 
-import './category.styles.scss'
+import {CategoryContainer, CategoryTitle} from './category.styles.jsx'
 
 
 const Category = () => {
@@ -18,8 +18,8 @@ const Category = () => {
 
   return (
     <>
-      <h2 className='category-title'>{category}</h2>
-      <div className='category-container'>
+      <CategoryTitle>{category}</CategoryTitle>
+      <CategoryContainer>
         {
           // safeguard in case products is empty (especially due to async)
           products && 
@@ -27,7 +27,7 @@ const Category = () => {
           <ProductCard key={product.id} product={product} />
           )
         )}
-      </div>
+      </CategoryContainer>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { CartContext } from '../../contexts/cart-context';
-import './checkout-item.styles.scss'
+import {CheckoutItemContainer, ImageContainer, Name, Quantity, Value, Price, Arrow, RemoveButton} from './checkout-item.styles.jsx'
 
 
 const CheckoutItem = ({ cartItem }) => {
@@ -13,22 +13,22 @@ const CheckoutItem = ({ cartItem }) => {
   const removeItemHandler = () => removeItemFromCart(cartItem);
 
   return (
-    <div className='checkout-item-container'>
-      <div className='image-container'>
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </div>
-      <span className='name'>{name}</span>
-      <span className='quantity'>
+      </ImageContainer>
+      <Name>{name}</Name>
+      <Quantity>
         {/* below is the special character code for arrow increment button */}
-        <div className='arrow' onClick={removeItemHandler}>&#10094;</div>
-        <span className='value'>{quantity}</span>
+        <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
         {/* below is the special character code for arrow decrement button */}
-        <div className='arrow' onClick={addItemHandler}>&#10095;</div>
-      </span>
-      <span className='price'>{price}</span>
+        <Arrow onClick={addItemHandler}>&#10095;</Arrow>
+      </Quantity>
+      <Price>{price}</Price>
       {/* below is the special character code for X remove button */}
-      <div className='remove-button' onClick={clearItemHandler}>&#10005;</div>
-    </div>
+      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   )
 }
 

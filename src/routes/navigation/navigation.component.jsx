@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CrwnLogo from '../../assets/CrwnLogo'
 
-import './navigation.styles.scss'
+import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles.jsx'
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
@@ -23,28 +23,28 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="navigation" >
-        <Link className="logo-container" to='/'>
+      <NavigationContainer>
+        <LogoContainer to='/'>
           <CrwnLogo className="logo"/>
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop" >
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop" >
             SHOP
-          </Link>
+          </NavLink>
           {
             currentUser ? (
-              <span className="nav-link" onClick={signOutHandler}>Sign Out</span>
+              <NavLink as='span' onClick={signOutHandler}>Sign Out</NavLink>
             ) : (
-              <Link className="nav-link" to="/auth" >
+              <NavLink to="/auth" >
               Sign In
-              </Link>
+              </NavLink>
             )
           }
           <CartIcon />
-        </div>
+        </NavLinks>
         {/* douple ampersand returns last truthy value (so returns the component if both are truthy) */}
         { isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   )

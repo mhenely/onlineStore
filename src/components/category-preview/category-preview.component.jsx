@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 
-import './category-preview.styles.scss'
+import {CategoryPreveiewContainer, Preview} from './category-preview.styles.jsx'
 import ProductCard from '../product-card/product-card.component';
 
 const CategoryPreview = ({ title, products}) => {
   return (
-    <div className='category-preview-container'>
+    <CategoryPreveiewContainer>
       <h2>
         <Link to={title} className='title'>{title.toUpperCase()}</Link>
       </h2>
-      <div className='preview'>
+      <Preview>
         {
           // only grab first 4 items in the category
           products
@@ -17,8 +17,8 @@ const CategoryPreview = ({ title, products}) => {
           .map((product) =>
           <ProductCard key={product.id} product={product}/>)
         }
-      </div>
-    </div>
+      </Preview>
+    </CategoryPreveiewContainer>
   )
 }
 
