@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import App from './App.jsx'
-import { CartProvider } from './contexts/cart-context.jsx'
 import { store } from './store/store.js'
 
 import '../index.scss'
@@ -12,9 +11,7 @@ import '../index.scss'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-          <CartProvider>
-            <App />
-          </CartProvider>
+      <App />
     </BrowserRouter>
   </Provider>
 )
