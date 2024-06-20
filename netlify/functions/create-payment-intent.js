@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
+console.log('MARKER 1000');
+console.log(process.env.VITE_PUBLISHABLE_KEY)
 export const handler = async(event) => {
   try {
     const { amount } = JSON.parse(event.body);
