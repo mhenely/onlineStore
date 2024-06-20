@@ -9,6 +9,7 @@ import { getCurrentUser, createUserDocumentFromAuth, signInWithGooglePopup, sign
 export function* getSnapshotFromUserAuth (userAuth, additionalDetails) {
   try {
     const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
+    console.log('snapshot: ', userSnapshot);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data}));
   }
   catch(error) {
@@ -30,6 +31,7 @@ export function* isUserAuthenticated () {
 export function* signInWithGoogle () {
   try {
     const { user } = yield call(signInWithGooglePopup);
+    console.log(user, 'MARKER')
     yield call(getSnapshotFromUserAuth, user);
   }
   catch (error) {

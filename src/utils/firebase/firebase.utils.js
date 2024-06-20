@@ -84,7 +84,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
       console.log('Error while creating the user', error.message);
     }
   }
-  // if user data does not exist
+  // if user data does exist
   return userDocRef;
 }
 
@@ -97,7 +97,6 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
 
 export const signInAuthUserwithEmailAndPassword = async(email, password) => {
-  console.log('MARKER MARKER')
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password); 
 } 
