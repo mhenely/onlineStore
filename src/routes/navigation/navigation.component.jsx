@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils.js";
 import CrwnLogo from '../../assets/CrwnLogo'
@@ -9,17 +9,25 @@ import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigat
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../store/user/user.selector.js";
+import { signOutStart } from "../../store/user/user.action.js";
 
 
 const Navigation = () => {
 
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
 
-  // tracking authentication state of the user and resetting context back to the state of no user logged in
-  const signOutHandler = async() => {
-    const result = await signOutUser();
+  // with saga
+  const signOutUser = async() => {
+    dispatch(signOutStart());
   }
+
+  // with no saga
+  // tracking authentication state of the user and resetting context back to the state of no user logged in
+  // const signOutHandler = async() => {
+  //   const result = await signOutUser();
+  // }
 
   return (
     <>
@@ -33,7 +41,7 @@ const Navigation = () => {
           </NavLink>
           {
             currentUser ? (
-              <NavLink as='span' onClick={signOutHandler}>Sign Out</NavLink>
+              <NavLink as='span' onClick={signOutUser}>Sign Out</NavLink>
             ) : (
               <NavLink to="/auth" >
               Sign In

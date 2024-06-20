@@ -30,7 +30,7 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGoolePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 
@@ -97,6 +97,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
 
 export const signInAuthUserwithEmailAndPassword = async(email, password) => {
+  console.log('MARKER MARKER')
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password); 
 } 
@@ -104,3 +105,15 @@ export const signInAuthUserwithEmailAndPassword = async(email, password) => {
 export const signOutUser = async() => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      // close listener to prevent memory leak
+      unsubscribe();
+      resolve(userAuth);
+    }, 
+    reject
+  )
+  })
+}

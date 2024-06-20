@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { signInAuthUserwithEmailAndPassword, createUserDocumentFromAuth, signInWithGoolePopup } from "../../utils/firebase/firebase.utils.js";
+import { useDispatch } from "react-redux";
+import { signInAuthUserwithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils.js";
 import FormInput from "../form-input/form-imput";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import {ButtonsContainer, SignInContainer} from './signIn-form.styles.jsx';
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.action.js";
 
 
 const defaultFormFields = {
@@ -14,13 +16,21 @@ const SignInForm = () => {
   const [ formFields, setFormFields ] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const dispatch = useDispatch();
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   }
 
+  // with saga
   const signInWithGoogle = async() => {
-    await signInWithGoolePopup();
+    dispatch(googleSignInStart());
   }
+
+  // without saga
+  // const signInWithGoogle = async() => {
+  //   await signInWithGoolePopup();
+  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,24 +40,33 @@ const SignInForm = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     
+    // with saga
+
     try {
-      const {user} = await signInAuthUserwithEmailAndPassword(email, password)
+      dispatch(emailSignInStart(email, password));
       resetFormFields();
     }
-    catch (error) {
-      switch (error.code) {
-        case 'auth/wrong-password':
-          alert('Incorrect email and password combination')
-          break;
-        case 'auth/user-not-found':
-          alert('No user associated with this email');
-          break;
-        default:
-          console.log(error);
-      }
-      
-      console.log('ERROR', error.message)
+    catch(error) {
+      console.log('USER SIGN IN FAILED', error)
     }
+
+    // without saga
+    // try {
+    //   const {user} = await signInAuthUserwithEmailAndPassword(email, password)
+    //   resetFormFields();
+    // }
+    // catch (error) {
+    //   switch (error.code) {
+    //     case 'auth/wrong-password':
+    //       alert('Incorrect email and password combination')
+    //       break;
+    //     case 'auth/user-not-found':
+    //       alert('No user associated with this email');
+    //       break;
+    //     default:
+    //       console.log(error);
+    //   }
+    // }
   }
 
   return (

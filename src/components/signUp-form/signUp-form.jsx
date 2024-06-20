@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils.js";
 import FormInput from "../form-input/form-imput";
 import Button from "../button/button.component";
 
 
 import {SignUpContainer} from './signUp-form.styles.jsx';
+import { signUpStart } from "../../store/user/user.action.js";
 
 const defaultFormFields = {
   displayName: '',
@@ -14,6 +17,8 @@ const defaultFormFields = {
 }
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+
   const [ formFields, setFormFields ] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -35,10 +40,14 @@ const SignUpForm = () => {
     }
     
     try {
-      const {user} = await createAuthUserWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth(user, { displayName })
+      // with saga
+      dispatch(signUpStart(email, password, displayName));
       resetFormFields();
 
+      // without saga
+      // const {user} = await createAuthUserWithEmailAndPassword(email, password);
+      // await createUserDocumentFromAuth(user, { displayName })
+      // resetFormFields();
     }
     catch (error) {
       console.log('error while creating user with email and password', error.message);
