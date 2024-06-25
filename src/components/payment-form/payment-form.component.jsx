@@ -16,8 +16,6 @@ const PaymentForm = () => {
   const elements = useElements();
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
-
-  console.log(currentUser);
   
   const [ isProcessingPayment, setIsProcessingPayment ] = useState(false);
 

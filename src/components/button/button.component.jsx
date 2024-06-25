@@ -20,7 +20,7 @@ const Button = ({children, buttonType, isLoading, ...otherProps}) => {
   const CustomButton = getButton(buttonType);
 
   return (
-    <CustomButton diabled={isLoading} {...otherProps}>
+    <CustomButton disabled={isLoading} {...otherProps}>
       {isLoading ? <ButtonSpinner /> : children}
     </CustomButton>
   )
