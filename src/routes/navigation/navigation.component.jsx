@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils.js";
-import CrwnLogo from '../../assets/CrwnLogo'
+import HomeLogo from '../../assets/HomeLogo.jsx'
 
 import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
 import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles.jsx'
@@ -33,11 +32,11 @@ const Navigation = () => {
     <>
       <NavigationContainer>
         <LogoContainer to='/'>
-          <CrwnLogo className="logo"/>
+          <HomeLogo className="logo"/>
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop" >
-            SHOP
+            Shop
           </NavLink>
           {
             currentUser ? (

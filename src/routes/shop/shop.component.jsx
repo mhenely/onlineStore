@@ -4,16 +4,18 @@ import { useDispatch } from 'react-redux';
 
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import Category from '../category/category.component';
-import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils.js';
-import { setCategories } from '../../store/categories/category.action.js';
+import { addCollectionAndDocuments, getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils.js';
+// import { setCategories } from '../../store/categories/category.action.js';
 // import {ProductsContainer} from './shop.styles.jsx'
 import { fetchCategoriesStart } from '../../store/categories/category.action.js';
+// import SHOP_DATA from '../../shop-data.js';
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategoriesStart());
+    // addCollectionAndDocuments('categories', SHOP_DATA)
   }, [])
 
   // non redux thunk code

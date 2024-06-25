@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import ShoppingIcon from '../../assets/shopping-bag';
+import ShoppingCartIcon from "../../assets/ShoppingCartIcon";
 
-export const ShopIcon = styled(ShoppingIcon)`
+export const ShopIcon = styled(ShoppingCartIcon)`
   width: 24px;
   height: 24px;
 `;
@@ -18,11 +18,11 @@ export const CartIconContainter = styled.div`
 `;
 
 export const ItemCount = styled.span`
-  position: absolute; 
+  position: relative; 
   font-size: 10px; 
   font-weight: bold; 
   bottom: 12px; 
-  color: white;
+  color: black;
 `;
 
 // .cart-icon-container { 

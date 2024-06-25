@@ -4,34 +4,34 @@ import {DirectoryContainer} from './directory.styles.jsx'
 const categories = [
   {
     id: 1,
-    title: "hats",
-    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-    route: 'shop/hats'
+    title: "cooking",
+    imageUrl: "https://as2.ftcdn.net/v2/jpg/03/32/75/39/1000_F_332753934_tBacXEgxnVplFBRyKbCif49jh0Wz89ns.jpg",
+    route: 'shop/cooking'
     
   },
   {
     id: 2,
-    title: "jackets",
-    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-    route: 'shop/jackets'
+    title: "national parks",
+    imageUrl: "https://cdn.outsideonline.com/wp-content/uploads/2021/04/13/arches-best-time-visit_h.jpg?width=800",
+    route: 'shop/national%20parks'
   },
   {
     id: 3,
-    title: "sneakers",
-    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-    route: 'shop/sneakers'
+    title: "sailing",
+    imageUrl: "https://images.pexels.com/photos/1586804/pexels-photo-1586804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    route: 'shop/sailing'
   },
   {
     id: 4,
-    title: "womens",
-    imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-    route: 'shop/womens'
+    title: "soccer",
+    imageUrl: "https://images.pexels.com/photos/1171084/pexels-photo-1171084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    route: 'shop/soccer'
   },
   {
     id: 5,
-    title: "mens",
-    imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-    route: 'shop/mens'
+    title: "traveling",
+    imageUrl: "https://tailoredspain.com/wp-content/uploads/2015/03/traveling.png",
+    route: 'shop/traveling'
   }
 ]
 
