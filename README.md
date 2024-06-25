@@ -1,6 +1,8 @@
 <div align="center">
 
-## [![banner](src/assets/screenshots/HomePage.png)](https://magnificent-gaufre-911888.netlify.app)
+<img src="src/assets/screenshots/HomePage.png" alt="Checkout Page"/>
+
+<!-- ## [![banner](src/assets/screenshots/HomePage.png)](https://magnificent-gaufre-911888.netlify.app) -->
 
 ### This online store displays various personal interests as options for purchase. By navigating the site, you can add the items that interest you to the cart and explore the functionality as well as my personal interests!
 
